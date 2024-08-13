@@ -1,0 +1,19 @@
+{
+    "name": "site_to_pdf",
+    "version": "1.0.0",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon js, html ./bin/www",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "express": "^4.19.2",
+        "nodemon": "^3.1.4",
+        "path": "^0.12.7",
+        "puppeteer": "^23.0.2",
+        "web-streams-polyfill": "^4.0.0"
+    }
+}
