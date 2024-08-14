@@ -21,7 +21,8 @@ router.get("/", async (req, res, next) => {
     try {
         const browser = await puppeteer.launch({
             headless: true, // 헤드리스 모드로 브라우저 실행
-            executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", // Mac의 경우
+            // executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", // Mac의 경우
+            executablePath: "/usr/local/bin/chromium", // 우분투
             args: [
                 "--no-sandbox",
                 // "--single-process",
