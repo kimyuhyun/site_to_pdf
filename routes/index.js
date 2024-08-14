@@ -38,8 +38,9 @@ router.get("/", async (req, res, next) => {
         });
 
         const unixTimestampInMilliseconds = Date.now();
-        console.log(`${folder}/${unixTimestampInMilliseconds}.pdf`);
-        
+        const outputPath = `${folder}/${unixTimestampInMilliseconds}.pdf`;
+        console.log(outputPath);
+
         await page.pdf({
             path: `${folder}/${unixTimestampInMilliseconds}.pdf`,
             format: "A4", // PDF 형식 A4
@@ -48,7 +49,7 @@ router.get("/", async (req, res, next) => {
         await browser.close();
 
         // HTTP 경로 생성 및 반환
-        const pdfUrl = `${req.protocol}://${req.get("host")}/pdf/output.pdf`;
+        const pdfUrl = `${req.protocol}://${req.get("host")}/${outputPath}`;
         res.json({ code: 1, url: pdfUrl });
     } catch (error) {
         console.error(error);
