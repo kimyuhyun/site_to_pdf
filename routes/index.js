@@ -37,8 +37,9 @@ router.get("/", async (req, res, next) => {
             waitUntil: "networkidle0", // 대기, 페이지가 완전히 로드될 때까지
         });
 
+        const unixTimestampInMilliseconds = Date.now();
         await page.pdf({
-            path: `${folder}/output.pdf`,
+            path: `${folder}/${unixTimestampInMilliseconds}.pdf`,
             format: "A4", // PDF 형식 A4
             printBackground: false, // 페이지 배경 포함
         });
