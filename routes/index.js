@@ -38,6 +38,8 @@ router.get("/", async (req, res, next) => {
         });
 
         const unixTimestampInMilliseconds = Date.now();
+        console.log(`${folder}/${unixTimestampInMilliseconds}.pdf`);
+        
         await page.pdf({
             path: `${folder}/${unixTimestampInMilliseconds}.pdf`,
             format: "A4", // PDF 형식 A4
