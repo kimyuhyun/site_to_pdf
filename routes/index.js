@@ -49,17 +49,30 @@ router.get("/", async (req, res, next) => {
         await browser.close();
 
         // HTTP 경로 생성 및 반환
-        const pdfUrl = `${req.protocol}://${req.get("host")}/${outputPath}`;
-        res.json({ code: 1, url: pdfUrl });
+        const pdfUrl = `${req.protocol}://${req.get("host")}/${outputPath.replace("./", "")}`;
+        res.json({ code: 1, url: pdfUrl, filename: `${unixTimestampInMilliseconds}.pdf` });
     } catch (error) {
         console.error(error);
         res.status(500).send("An error occurred while generating the PDF");
     }
+});
 
-    // res.json({
-    //     title: "API",
-    //     mode: process.env.NODE_ENV,
-    // });
+router.get("/file_delete", async (req, res, next) => {
+    const filename = req.query.filename;
+
+    if (!filename) {
+        return res.status(400).send("filename is required");
+    }
+
+    const folder = "./pdf";
+    const filePath = `${folder}/${filename}`;
+    fs.unlink(filePath, (err) => {
+        if (err) {
+            res.json({ code: 0, message: `Failed to delete file:, ${err}` });
+        } else {
+            res.json({ code: 1, message: `FDeleted file:, ${filePath}` });
+        }
+    });
 });
 
 module.exports = router;
